@@ -413,6 +413,7 @@ SQLRETURN MADB_StmtPrepare(MADB_Stmt *Stmt, char *StatementText, SQLINTEGER Text
       return SQL_SUCCESS;
     }
   }
+
   UNLOCK_MARIADB(Stmt->Connection);
 
   if (!MADB_ValidateStmt(StatementText))
@@ -422,7 +423,8 @@ SQLRETURN MADB_StmtPrepare(MADB_Stmt *Stmt, char *StatementText, SQLINTEGER Text
   }
 
   p= strndup(StatementText, TextLength);
-  Stmt->StmtString= _strdup(trim(p));
+  /* FixIsoFormat also trims the string */
+  Stmt->StmtString = _strdup(FixIsoFormat(p));
   TextLength= (SQLINTEGER)strlen(Stmt->StmtString);
   MADB_FREE(p);
 
