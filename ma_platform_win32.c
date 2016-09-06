@@ -206,7 +206,6 @@ int MADB_ConvertAnsi2Unicode(Client_Charset *cc, const char *AnsiString, SQLLEN 
   /* Truncation */
   if (Tmp != UnicodeString)
   {
-   
     wcsncpy(UnicodeString, L"", 1);
     wcsncat(UnicodeString, Tmp, UnicodeLength- 1);
     if (Error)
