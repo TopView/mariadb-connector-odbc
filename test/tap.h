@@ -766,6 +766,7 @@ int reset_changed_server_variables(void)
   return error;
 }
 
+
 SQLWCHAR * str2sqlwchar_on_gbuff(const char *str, size_t len, CHARSET_INFO *from_cs, CHARSET_INFO *to_cs);
 
 int run_tests(MA_ODBC_TESTS *tests)
