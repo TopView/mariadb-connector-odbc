@@ -110,8 +110,6 @@ SQLRETURN MADB_ExecuteQuery(MADB_Stmt * Stmt, char *StatementText, SQLINTEGER Te
 /* {{{ MADB_StmtBulkOperations */
 SQLRETURN MADB_StmtBulkOperations(MADB_Stmt *Stmt, SQLSMALLINT Operation)
 {
-  SQLHSTMT NewStmt= NULL;
-
   MADB_CLEAR_ERROR(&Stmt->Error);
   switch(Operation)
   {
@@ -440,7 +438,6 @@ SQLRETURN MADB_StmtPrepare(MADB_Stmt *Stmt, char *StatementText, SQLINTEGER Text
 
   if ((CursorName = MADB_ParseCursorName(Stmt, &WhereOffset)))
   {
-    unsigned int Length= WhereOffset + 10;
     DYNAMIC_STRING StmtStr;
     char *TableName;
 
@@ -1313,9 +1310,6 @@ SQLRETURN MADB_StmtBindCol(MADB_Stmt *Stmt, SQLUSMALLINT ColumnNumber, SQLSMALLI
   MADB_Desc *Ard= Stmt->Ard;
   MADB_DescRecord *Record;
 
-  if (!Stmt)
-    return SQL_INVALID_HANDLE;
-  
   if ((ColumnNumber < 1 && Stmt->Options.UseBookmarks == SQL_UB_OFF) || 
       (mysql_stmt_field_count(Stmt->stmt) &&
        Stmt->stmt->state > MYSQL_STMT_PREPARED && 
@@ -1797,7 +1791,7 @@ SQLRETURN MADB_StmtFetch(MADB_Stmt *Stmt, my_bool KeepPosition)
   MADB_Desc         *ArdDesc=    Stmt->Ard;
   MYSQL_ROW_OFFSET  SaveCursor= NULL;
     
-  if (!Stmt || !Stmt->stmt)
+  if (!Stmt->stmt)
     return SQL_INVALID_HANDLE;
 
   MADB_CLEAR_ERROR(&Stmt->Error);
