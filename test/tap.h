@@ -767,7 +767,7 @@ int reset_changed_server_variables(void)
 }
 
 
-SQLWCHAR * str2sqlwchar_on_gbuff(const char *str, size_t len, CHARSET_INFO *from_cs, CHARSET_INFO *to_cs);
+SQLWCHAR * str2sqlwchar_on_gbuff(const char *str, size_t len, MARIADB_CHARSET_INFO *from_cs, MARIADB_CHARSET_INFO *to_cs);
 
 int run_tests(MA_ODBC_TESTS *tests)
 {
@@ -977,7 +977,7 @@ SQLWCHAR* latin_as_sqlwchar(char *str, SQLWCHAR *buffer)
 /**
   @len[in] - length of the source string in bytes, including teminating NULL
  */
-SQLWCHAR * str2sqlwchar_on_gbuff(const char *str, size_t len, CHARSET_INFO *from_cs, CHARSET_INFO *to_cs)
+SQLWCHAR * str2sqlwchar_on_gbuff(const char *str, size_t len, MARIADB_CHARSET_INFO *from_cs, MARIADB_CHARSET_INFO *to_cs)
 {
   SQLWCHAR   *res= buff_pos;
   size_t      rc, buff_size= sqlwchar_buff + sizeof(sqlwchar_buff) - buff_pos;

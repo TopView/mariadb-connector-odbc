@@ -202,7 +202,7 @@ void MADB_SetNativeError(MADB_Error *Error, SQLSMALLINT HandleType, void *Ptr)
 /* {{{ MADB_SetError */
 SQLRETURN MADB_SetError(MADB_Error  *Error,
                         unsigned int SqlErrorCode,
-                        char        *NativeErrorMsg,
+                        const char  *NativeErrorMsg,
                         unsigned int NativeError)
 {
   unsigned int ErrorCode= SqlErrorCode;
